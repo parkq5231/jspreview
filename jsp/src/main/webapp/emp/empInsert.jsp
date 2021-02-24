@@ -28,7 +28,19 @@
   					}
   				});
   			//
-  		});
+  		});//end of btnEmail
+  		$("#search").on("click",function(){
+  			//매니저 ,이름
+  			var id = "managerId="+$("[name=manager_id]").val();
+  			//search 눌렀을 때의 화면
+  			$.ajax({
+  				url:"../EmpSearch?",
+  				data :id,
+  				success:function(response){
+  			window.open("","", "width=200, height=100");
+  				}
+  			})
+  		})
   	})
   </script>
 </head>
@@ -67,7 +79,7 @@
 	manager_id 
 	<input type="text" name="manager_id">
 	<input type="text" name="name">
-	<button type="button" >사원검색</button><br>	
+	<button type="button" id="search">사원검색</button><br>	
 
 	<button type="submit">등록</button>
 	<button type="reset">초기화</button>
