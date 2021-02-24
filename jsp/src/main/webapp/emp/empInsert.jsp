@@ -59,7 +59,7 @@
 	</select><br>
 	department_id 
 	<c:forEach var="dept" items="${deptList}">
-		<input type="radio" value="${dept.department_id}"
+		<input type="radio" name = "deptid" value="${dept.department_id}"
 			<c:if test="${dept.department_id == empVO.department_id}">
 			checked="checked"</c:if>>
 		${dept.department_name}

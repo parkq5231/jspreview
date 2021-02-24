@@ -121,7 +121,8 @@ public class EmpDAO {
 		}
 		return vo;
 	}
-	//이메일 조회
+
+	// 이메일 조회
 	public EmpVO selectOneByEmail(String id) {
 		EmpVO vo = null;
 		try {
@@ -161,7 +162,44 @@ public class EmpDAO {
 		return vo;
 	}
 
-	
+	// EMP 등록용
+	public void empInsert(EmpVO vo) {
+		try {
+			// 1.connect
+			JdbcUtil.connect();
+			// 2. statement(sql구문)
+			String sql = "INSERT INTO EMPLOYEES "//
+					+ "EMPLOYEE_ID, " //
+					+ "FIRST_NAME, "//
+					+ "LAST_NAME, "//
+					+ "EMAIL, "//
+					+ "PHONE_NUMBER, "//
+					+ "HIRE_DATE, "//
+					+ "JOB_ID "//
+					+ "DEPARTMENT_ID, "//
+					+ "MANAGER_ID "//
+					+ "VALUES(?,?,?,?,?,?,?,?,?)";
+			PreparedStatement psmt = conn.prepareStatement(sql);
+			// 3.execute
+			psmt.setString(1, vo.getEmployee_id());
+			psmt.setString(2, vo.getFirst_name());
+			psmt.setString(3, vo.getLast_name());
+			psmt.setString(4, vo.getEmail());
+			psmt.setString(5, vo.getPhone_number());
+			psmt.setDate(6, vo.getHire_date());
+			psmt.setString(7, vo.getJob_id());
+			psmt.setString(8, vo.getDepartment_id());
+			psmt.setString(9, vo.getManager_id());
+			int r = psmt.executeUpdate();
+			System.out.println(r + "건이 등록됨.");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 5.close
+			JdbcUtil.disconnect(conn);
+		}
+	}
+
 	// insert
 	public void insert(EmpVO vo) {
 		try {
@@ -184,7 +222,6 @@ public class EmpDAO {
 			psmt.setString(5, vo.getJob_id());
 			int r = psmt.executeUpdate();
 			System.out.println(r + "건이 등록됨.");
-			// 4.resultset(select = 조회결과)
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -198,10 +235,16 @@ public class EmpDAO {
 		try {
 			// 1.connect
 			JdbcUtil.connect();
+			String sql = "UPDATE EMPLOYEES "//
+					+ "SET EMAIL =  ? "//
+					+ "WHERE EMPLOYEE_ID = ?";
 			// 2.psmt(sql구문)
-
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, vo.getEmail());
+			psmt.setString(2, vo.getEmployee_id());
 			// 3.execute
-
+			int r = psmt.executeUpdate();
+			System.out.println(r + "건 업데이트.");
 			// 4.resultset(select = 조회결과)
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -209,7 +252,6 @@ public class EmpDAO {
 			// 5.close
 			JdbcUtil.disconnect(conn);
 		}
-
 	} // end of update
 
 } // end of class
