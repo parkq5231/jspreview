@@ -1,4 +1,4 @@
-package emp;
+package emp.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -104,7 +104,53 @@ public class EmpDAO {
 //				vo.setEmployee_id(rs.getString("employee_id"));
 				vo.setFirst_name(rs.getString("first_name"));
 				vo.setLast_name(rs.getString("last_name"));
-				vo.setEmail(rs.getString(3));
+				vo.setEmail(rs.getString(4));
+				vo.setPhone_number(rs.getString("phone_number"));
+				vo.setHire_date(rs.getDate("hire_date"));
+				vo.setJob_id(rs.getString("job_id"));
+				vo.setSalary(rs.getString("salary"));
+				vo.setCommission_pct(rs.getString("commission_pct"));
+				vo.setManager_id(rs.getString("manager_id"));
+				vo.setDepartment_id(rs.getString("department_id"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		} finally {
+			JdbcUtil.disconnect(conn);
+		}
+		return vo;
+	}
+	//이메일 조회
+	public EmpVO selectOneByEmail(String id) {
+		EmpVO vo = null;
+		try {
+			conn = JdbcUtil.connect();
+			String sql = "SELECT "//
+					+ "EMPLOYEE_ID, "//
+					+ "FIRST_NAME, "//
+					+ "LAST_NAME, "//
+					+ "EMAIL, "//
+					+ "PHONE_NUMBER, "//
+					+ "HIRE_DATE, "//
+					+ "JOB_ID, "//
+					+ "SALARY, "//
+					+ "COMMISSION_PCT, "//
+					+ "MANAGER_ID, "//
+					+ "DEPARTMENT_ID "//
+					+ "FROM EMPLOYEES "//
+					+ "WHERE EMAIL = ?";
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				vo = new EmpVO();
+				vo.setEmployee_id(rs.getString(1));
+//				vo.setEmployee_id(rs.getString("employee_id"));
+				vo.setFirst_name(rs.getString("first_name"));
+				vo.setLast_name(rs.getString("last_name"));
+				vo.setEmail(rs.getString(4));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -115,6 +161,7 @@ public class EmpDAO {
 		return vo;
 	}
 
+	
 	// insert
 	public void insert(EmpVO vo) {
 		try {
