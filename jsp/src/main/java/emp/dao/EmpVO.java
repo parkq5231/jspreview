@@ -2,9 +2,15 @@ package emp.dao;
 
 import java.sql.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class EmpVO {
 	private String employee_id;
@@ -18,7 +24,4 @@ public class EmpVO {
 	private String commission_pct;
 	private String manager_id;
 	private String department_id;
-	
-	
-	
 }

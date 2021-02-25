@@ -23,8 +23,8 @@ public class JdbcUtil {
 
 			// DBCP connection
 			Context initContext = new InitialContext();
-			Context envContext = (Context) initContext.lookup("java:/comp/env");	// jndi
-			DataSource ds = (DataSource) envContext.lookup("jdbc/myoracle");
+			// Context envContext = (Context) initContext.lookup("java:/comp/env"); // jndi
+			DataSource ds = (DataSource) initContext.lookup("java:/comp/env/jdbc/myoracle");
 			conn = ds.getConnection();
 
 		} catch (Exception e) {

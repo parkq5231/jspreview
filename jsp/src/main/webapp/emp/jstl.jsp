@@ -16,6 +16,6 @@
 	<c:forEach var="i" begin="1" end="10" step="1">
 		<c:set var="sum" value="${sum+i}" />
 	</c:forEach>
-	${sum}
+	<c:out value="${sum}" />
 </body>
 </html>

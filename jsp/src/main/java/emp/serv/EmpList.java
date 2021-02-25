@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import emp.dao.DeptDAO;
-import emp.dao.DeptVO;
 import emp.dao.EmpDAO;
 import emp.dao.EmpVO;
 
@@ -22,12 +20,10 @@ public class EmpList extends HttpServlet {
 
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/emp/list.jsp").forward(request, response);
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }

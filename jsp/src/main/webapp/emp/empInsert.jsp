@@ -21,23 +21,34 @@
   			//ajax
   			$.ajax({
   					url: "../EmailCheck?",
-  					data : param,
+  					data : param,		// 서버에 보낼 parameter
+  					dataType:"xml",	// 결과 타입을 의미함
   					//data : {email : $("[name=email]").val()},
   					success : function(response) {
-  						$("#emailResult").html("이메일 " + response);
-  					}
-  				});
-  			//
+  						//result span tag
+  						
+  						//json
+  						/* if(response.email){	//true false를 의미
+  							$("#emailResult").html("<font color='blue'>사용가능</font>");
+  						}else{
+  							$("#emailResult").html("<font color='red'>사용불가능</font>");
+  						} */
+  						
+  						//xml
+  							$("#emailResult").html($(response).find("email").html());
+  						
+  					}//end of success
+  				});//end of ajax
   		});//end of btnEmail
   		$("#search").on("click",function(){
   			//매니저 ,이름
-  			var id = "managerId="+$("[name=manager_id]").val();
+  			var id = "managerId=" + $("[name=manager_id]").val();
   			//search 눌렀을 때의 화면
   			$.ajax({
-  				url:"../EmpSearch?",
-  				data :id,
-  				success:function(response){
-  			window.open("","", "width=200, height=100");
+  				url: "../EmpSearch?",
+  				data : id,
+  				success: function(response){
+  			window.open("../EmpSearch","매니저 조회", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=600,width=400,height=400");
   				}
   			})
   		})
@@ -46,9 +57,9 @@
 </head>
 <body>
 <h3 id="top">사원등록</h3>
-<c:set var="url" value="../EmpInsert" />
+<c:set var="url" value="EmpInsert" />
 <c:if test="${not empty empVO.employee_id}">
-<c:set var="url" value="../EmpUpdate" />
+<c:set var="url" value="EmpUpdate" />
 </c:if>
 <form action="${url}" method="post" name="frm">
 	employee_id <input type="number" name="employee_id"

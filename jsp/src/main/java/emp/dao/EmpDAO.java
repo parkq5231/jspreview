@@ -100,8 +100,8 @@ public class EmpDAO {
 			rs = psmt.executeQuery();
 			if (rs.next()) {
 				vo = new EmpVO();
-				vo.setEmployee_id(rs.getString(1));
-//				vo.setEmployee_id(rs.getString("employee_id"));
+				//vo.setEmployee_id(rs.getString(1));
+				vo.setEmployee_id(rs.getString("employee_id"));
 				vo.setFirst_name(rs.getString("first_name"));
 				vo.setLast_name(rs.getString("last_name"));
 				vo.setEmail(rs.getString(4));

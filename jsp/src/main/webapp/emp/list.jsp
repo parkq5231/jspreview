@@ -14,7 +14,7 @@
 <body>
 	<c:forEach items="${list}" var="emp">
 		이름: ${emp.first_name} ${emp.last_name}<br>
-		연봉: <fmt:formatNumber value="${emp.salary }" />
+		연봉: <fmt:formatNumber value="${emp.salary}" />
 		근무시작일: <fmt:formatDate value="${emp.hire_date}" dateStyle="long"/>
 		<hr>
 	</c:forEach>

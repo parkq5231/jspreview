@@ -27,6 +27,9 @@ public class EmpSearch extends HttpServlet {
 		EmpVO empVO = dao.selectOne(id);
 		request.setAttribute("empVO", empVO);
 		System.out.println(empVO);
+		request.getRequestDispatcher("/emp/search.jsp").forward(request, response);
+		
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
